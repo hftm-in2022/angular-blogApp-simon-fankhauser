@@ -5,6 +5,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BlogOverviewCardComponent } from '../../shared/blog-overview-card/blog-overview-card.component';
 import { BlogStore } from '../../core/stores/blog-state.store';
 import { ChangeDetectionStrategy } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-blog-overview-page',
@@ -14,6 +15,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
     RouterLink,
     BlogOverviewCardComponent,
     MatProgressSpinnerModule,
+    TranslateModule,
   ],
   templateUrl: './blog-overview-page.component.html',
   styleUrls: ['./blog-overview-page.component.scss'],

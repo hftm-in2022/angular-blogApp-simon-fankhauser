@@ -6,12 +6,17 @@
       mode="indeterminate"
       diameter="50"
     ></mat-progress-spinner>
-    <p>Loading data...</p>
-  </div>
-  <div *ngIf="errorDetail as e">
-    <p style="color: red">{{ e }}</p>
+    <p>{{ "BLOG_OVERVIEW.LOADING_DATA" | translate }}</p>
   </div>
 
+  <!-- Fehlerzustand -->
+  <div *ngIf="errorDetail as e">
+    <p style="color: red">
+      {{ "BLOG_OVERVIEW.ERROR_LOADING" | translate }}: {{ e }}
+    </p>
+  </div>
+
+  <!-- Blog-Übersicht -->
   <div class="blog-container">
     <ng-container *ngIf="paginatedBlogs as blogs">
       <ng-container *ngFor="let blog of blogs; trackBy: trackBlog">
@@ -27,7 +32,7 @@
   <!-- Button zum Laden weiterer Blogs -->
   <div class="load-more-container" *ngIf="hasMoreBlogs">
     <button class="load-more-button" (click)="loadMoreBlogs()">
-      Mehr Blogs laden
+      {{ "BLOG_OVERVIEW.LOAD_MORE" | translate }}
     </button>
   </div>
 </div>

@@ -6,7 +6,9 @@
     [mode]="(isHandset$ | async) ? 'over' : 'side'"
     [opened]="(isHandset$ | async) === false"
   >
-    <mat-toolbar class="menu-toolbar"> Menu </mat-toolbar>
+    <mat-toolbar class="menu-toolbar">{{
+      "SIDEBAR.MENU" | translate
+    }}</mat-toolbar>
     <mat-nav-list>
       <!-- Navigation -->
       <a
@@ -14,7 +16,7 @@
         routerLink="/overview"
         routerLinkActive="router-link-active"
       >
-        Overview
+        {{ "SIDEBAR.OVERVIEW" | translate }}
       </a>
       <ng-container
         *ngIf="authService.isAuthenticated | async; else notAuthenticated"
@@ -24,23 +26,37 @@
           routerLink="/add-blog"
           routerLinkActive="router-link-active"
         >
-          Add Blog
+          {{ "SIDEBAR.ADD_BLOG" | translate }}
         </a>
         <a
           mat-list-item
           (click)="logout()"
           (keyup.enter)="logout()"
           tabindex="0"
-          >Logout</a
+          >{{ "SIDEBAR.LOGOUT" | translate }}</a
         >
       </ng-container>
 
       <!-- Fallback für nicht authentifizierte Benutzer -->
       <ng-template #notAuthenticated>
-        <a mat-list-item (click)="login()" (keyup.enter)="login()" tabindex="0"
-          >Login</a
-        >
+        <a mat-list-item (click)="login()" (keyup.enter)="login()" tabindex="0">
+          {{ "SIDEBAR.LOGIN" | translate }}
+        </a>
       </ng-template>
+
+      <div class="spacer"></div>
+
+      <!-- Sprachauswahl -->
+      <div class="language-selector">
+        <button
+          *ngFor="let lang of languages"
+          class="language-button"
+          [class.active]="lang === currentLanguage"
+          (click)="switchLanguage(lang)"
+        >
+          {{ lang.toUpperCase() }}
+        </button>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -57,19 +73,19 @@
       >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>Blog-App</span>
+      <span>{{ "APP.TITLE" | translate }}</span>
       <div class="spacer"></div>
-      <span
-        *ngIf="
-          authService.isAuthenticated | async;
-          else notAuthenticatedMessage
-        "
-        class="user-name"
+      <!-- Benutzerstatus -->
+      <ng-container
+        *ngIf="authService.isAuthenticated | async; else notLoggedIn"
       >
-        Angemeldet als: {{ authService.userName$ | async }}
-      </span>
-      <ng-template #notAuthenticatedMessage>
-        <span class="user-name">Nicht angemeldet</span>
+        <span
+          >{{ "SIDEBAR.LOGGED_IN_AS" | translate }}:
+          {{ authService.userName$ | async }}</span
+        >
+      </ng-container>
+      <ng-template #notLoggedIn>
+        <span>{{ "SIDEBAR.NOT_LOGGED_IN" | translate }}</span>
       </ng-template>
     </mat-toolbar>
     <router-outlet></router-outlet>

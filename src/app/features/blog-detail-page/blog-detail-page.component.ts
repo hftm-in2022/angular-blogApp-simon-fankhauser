@@ -12,11 +12,18 @@ import { RouterLink } from '@angular/router';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BlogStore } from '../../core/stores/blog-state.store';
 import { CommonModule } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-blog-detail-page',
   standalone: true,
-  imports: [MatIcon, RouterLink, CommonModule, MatProgressSpinnerModule],
+  imports: [
+    MatIcon,
+    RouterLink,
+    CommonModule,
+    MatProgressSpinnerModule,
+    TranslateModule,
+  ],
   templateUrl: './blog-detail-page.component.html',
   styleUrls: ['./blog-detail-page.component.scss'], // korrigiert: styleUrls (Plural)
   changeDetection: ChangeDetectionStrategy.OnPush,

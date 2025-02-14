@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
+import { TranslateModule } from '@ngx-translate/core';
 
 export type Blog = {
   author: string;
@@ -18,7 +19,7 @@ export type Blog = {
 @Component({
   selector: 'app-blog-overview-card',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIcon],
+  imports: [MatCardModule, MatButtonModule, MatIcon, TranslateModule],
   templateUrl: './blog-overview-card.component.html',
   styleUrls: ['./blog-overview-card.component.scss'],
 })

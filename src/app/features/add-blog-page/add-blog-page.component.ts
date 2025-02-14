@@ -10,13 +10,14 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { BlogBackendService } from '../../core/services/blog-backend.service';
 import { BlogTitleValidator } from '../../core/validators/blog-title.validator';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-blog',
   templateUrl: './add-blog-page.component.html',
   styleUrls: ['./add-blog-page.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, TranslateModule],
 })
 export class AddBlogPageComponent {
   blogForm: FormGroup;

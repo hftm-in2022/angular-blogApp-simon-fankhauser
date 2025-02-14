@@ -1,0 +1,59 @@
+{
+  "APP": {
+    "TITLE": "Blog App"
+  },
+  "SIDEBAR": {
+    "MENU": "Menu",
+    "OVERVIEW": "Overview",
+    "ADD_BLOG": "Add Blog",
+    "LOGOUT": "Logout",
+    "LOGIN": "Login",
+    "LOGGED_IN_AS": "Logged in as",
+    "NOT_LOGGED_IN": "Not logged in"
+  },
+  "BLOG_OVERVIEW": {
+    "LOADING_DATA": "Loading data...",
+    "LOAD_MORE": "Load more blogs",
+    "ERROR_LOADING": "An error occurred while loading the blogs"
+  },
+  "ADD_BLOG_PAGE": {
+    "TITLE": "Add a New Blog",
+    "FORM": {
+      "TITLE_LABEL": "Title",
+      "CONTENT_LABEL": "Content",
+      "IMAGE_LABEL": "Upload Image"
+    },
+    "ERRORS": {
+      "TITLE_REQUIRED": "Title is required.",
+      "TITLE_MINLENGTH": "Title must be at least 3 characters long.",
+      "TITLE_EXISTS": "The title already exists.",
+      "CONTENT_REQUIRED": "Content is required.",
+      "CONTENT_MINLENGTH": "Content must be at least 10 characters long."
+    },
+    "BUTTONS": {
+      "BACK": "← Back to Blogs",
+      "RESET": "Reset",
+      "SAVE": "Save",
+      "SAVING": "Saving..."
+    }
+  },
+  "BLOG_DETAIL_PAGE": {
+    "LOADING": "Loading blog details...",
+    "BY": "By",
+    "WRITTEN": "Written",
+    "LAST_UPDATED": "Last Updated",
+    "COMMENTS": "Comments",
+    "SAYS": "says",
+    "CREATED_AT": "Created At",
+    "UPDATED_AT": "Updated At",
+    "NO_COMMENTS": "No comments available.",
+    "BACK_TO_BLOGS": "Back to all Blogs"
+  },
+  "BLOG_CARD": {
+    "IMAGE_ALT": "Image of the blog",
+    "PLACEHOLDER_IMAGE_ALT": "Placeholder image of the blog",
+    "AUTHOR": "Author",
+    "ICON_FAVORITE": "Favorite this blog",
+    "ICON_SHARE": "Share this blog"
+  }
+}

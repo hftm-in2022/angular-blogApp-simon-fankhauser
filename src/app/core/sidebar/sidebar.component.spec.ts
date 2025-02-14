@@ -4,9 +4,14 @@ import { SidebarComponent } from './sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthService } from '../../core/auth/auth.service'; // Pfad anpassen
+import { AuthService } from '../../core/auth/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import {
+  TranslateModule,
+  TranslateService,
+  TranslateStore,
+} from '@ngx-translate/core';
 
 class MockAuthService {
   isAuthenticated$ = of(false);
@@ -19,15 +24,18 @@ describe('SidebarComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        SidebarComponent, // Standalone-Komponente importieren
+        SidebarComponent,
         HttpClientTestingModule,
         MatSidenavModule,
         MatToolbarModule,
         BrowserAnimationsModule,
+        TranslateModule.forRoot(), // <--- Hier `ngx-translate` hinzufügen
       ],
       providers: [
         { provide: AuthService, useClass: MockAuthService },
-        { provide: ActivatedRoute, useValue: {} }, // Mock für ActivatedRoute hinzufügen
+        { provide: ActivatedRoute, useValue: {} },
+        TranslateService, // <--- TranslateService explizit bereitstellen
+        TranslateStore, // <--- TranslateStore explizit bereitstellen
       ],
     }).compileComponents();
   });

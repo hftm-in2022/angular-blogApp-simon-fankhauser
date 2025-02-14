@@ -1,0 +1,60 @@
+{
+    "APP": {
+      "TITLE": "Application Blog"
+    },
+    "SIDEBAR": {
+      "MENU": "Menu",
+      "OVERVIEW": "Aperçu",
+      "ADD_BLOG": "Ajouter un blog",
+      "LOGOUT": "Se déconnecter",
+      "LOGIN": "Se connecter",
+      "LOGGED_IN_AS": "Connecté en tant que",
+      "NOT_LOGGED_IN": "Non connecté"
+    },
+    "BLOG_OVERVIEW": {
+      "LOADING_DATA": "Chargement des données...",
+      "LOAD_MORE": "Charger plus de blogs",
+      "ERROR_LOADING": "Une erreur s'est produite lors du chargement des blogs"
+    },
+    "ADD_BLOG_PAGE": {
+      "TITLE": "Ajouter un nouveau blog",
+      "FORM": {
+        "TITLE_LABEL": "Titre",
+        "CONTENT_LABEL": "Contenu",
+        "IMAGE_LABEL": "Télécharger une image"
+      },
+      "ERRORS": {
+        "TITLE_REQUIRED": "Le titre est requis.",
+        "TITLE_MINLENGTH": "Le titre doit comporter au moins 3 caractères.",
+        "TITLE_EXISTS": "Le titre existe déjà.",
+        "CONTENT_REQUIRED": "Le contenu est requis.",
+        "CONTENT_MINLENGTH": "Le contenu doit comporter au moins 10 caractères."
+      },
+      "BUTTONS": {
+        "BACK": "← Retour aux blogs",
+        "RESET": "Réinitialiser",
+        "SAVE": "Enregistrer",
+        "SAVING": "Enregistrement..."
+      }
+    },
+    "BLOG_DETAIL_PAGE": {
+      "LOADING": "Chargement des détails du blog...",
+      "BY": "Par",
+      "WRITTEN": "Écrit",
+      "LAST_UPDATED": "Dernière mise à jour",
+      "COMMENTS": "Commentaires",
+      "SAYS": "dit",
+      "CREATED_AT": "Créé le",
+      "UPDATED_AT": "Mis à jour le",
+      "NO_COMMENTS": "Aucun commentaire disponible.",
+      "BACK_TO_BLOGS": "Retour à tous les blogs"
+    },
+    "BLOG_CARD": {
+      "IMAGE_ALT": "Image du blog",
+      "PLACEHOLDER_IMAGE_ALT": "Image de remplacement du blog",
+      "AUTHOR": "Auteur",
+      "ICON_FAVORITE": "Mettre ce blog en favori",
+      "ICON_SHARE": "Partager ce blog"
+    }
+  }
+  

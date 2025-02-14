@@ -1,9 +1,11 @@
 <div class="add-blog-page">
-  <h2>Neuen Blog hinzufügen</h2>
+  <h2>{{ "ADD_BLOG_PAGE.TITLE" | translate }}</h2>
   <form [formGroup]="blogForm" class="blog-form">
     <!-- Titel -->
     <div class="form-group">
-      <label for="title">Titel</label>
+      <label for="title">{{
+        "ADD_BLOG_PAGE.FORM.TITLE_LABEL" | translate
+      }}</label>
       <input
         id="title"
         type="text"
@@ -11,39 +13,43 @@
         [class.invalid]="title?.invalid && title?.touched"
       />
       <div class="error" *ngIf="title?.invalid && title?.touched">
-        <small *ngIf="title?.errors?.['required']"
-          >Titel ist erforderlich.</small
-        >
-        <small *ngIf="title?.errors?.['minlength']">
-          Titel muss mindestens 3 Zeichen lang sein.
+        <small *ngIf="title?.errors?.['required']">
+          {{ "ADD_BLOG_PAGE.ERRORS.TITLE_REQUIRED" | translate }}
         </small>
-        <small *ngIf="title?.errors?.['titleExists']"
-          >Der Titel existiert bereits.</small
-        >
+        <small *ngIf="title?.errors?.['minlength']">
+          {{ "ADD_BLOG_PAGE.ERRORS.TITLE_MINLENGTH" | translate }}
+        </small>
+        <small *ngIf="title?.errors?.['titleExists']">
+          {{ "ADD_BLOG_PAGE.ERRORS.TITLE_EXISTS" | translate }}
+        </small>
       </div>
     </div>
 
     <!-- Inhalt -->
     <div class="form-group">
-      <label for="content">Inhalt</label>
+      <label for="content">{{
+        "ADD_BLOG_PAGE.FORM.CONTENT_LABEL" | translate
+      }}</label>
       <textarea
         id="content"
         formControlName="content"
         [class.invalid]="content?.invalid && content?.touched"
       ></textarea>
       <div class="error" *ngIf="content?.invalid && content?.touched">
-        <small *ngIf="content?.errors?.['required']"
-          >Inhalt ist erforderlich.</small
-        >
+        <small *ngIf="content?.errors?.['required']">
+          {{ "ADD_BLOG_PAGE.ERRORS.CONTENT_REQUIRED" | translate }}
+        </small>
         <small *ngIf="content?.errors?.['minlength']">
-          Inhalt muss mindestens 10 Zeichen lang sein.
+          {{ "ADD_BLOG_PAGE.ERRORS.CONTENT_MINLENGTH" | translate }}
         </small>
       </div>
     </div>
 
     <!-- Bild-Upload -->
     <div class="form-group">
-      <label for="image">Bild hochladen</label>
+      <label for="image">{{
+        "ADD_BLOG_PAGE.FORM.IMAGE_LABEL" | translate
+      }}</label>
       <input
         id="image"
         type="file"
@@ -58,10 +64,10 @@
     <!-- Buttons -->
     <div class="form-actions">
       <button type="button" class="btn back" (click)="goBack()">
-        ← Zurück zu den Blogs
+        {{ "ADD_BLOG_PAGE.BUTTONS.BACK" | translate }}
       </button>
       <button type="button" class="btn reset" (click)="onReset()">
-        Zurücksetzen
+        {{ "ADD_BLOG_PAGE.BUTTONS.RESET" | translate }}
       </button>
       <button
         type="button"
@@ -69,9 +75,12 @@
         (click)="onSave()"
         [disabled]="blogForm.invalid || isSaving"
       >
-        <ng-container *ngIf="!isSaving">Speichern</ng-container>
+        <ng-container *ngIf="!isSaving">
+          {{ "ADD_BLOG_PAGE.BUTTONS.SAVE" | translate }}
+        </ng-container>
         <ng-container *ngIf="isSaving">
-          <span class="spinner"></span> Speichern...
+          <span class="spinner"></span>
+          {{ "ADD_BLOG_PAGE.BUTTONS.SAVING" | translate }}
         </ng-container>
       </button>
     </div>
