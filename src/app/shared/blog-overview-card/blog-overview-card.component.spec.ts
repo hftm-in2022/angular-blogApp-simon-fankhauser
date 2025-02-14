@@ -4,6 +4,11 @@ import {
   Blog,
 } from './blog-overview-card.component';
 import { By } from '@angular/platform-browser';
+import {
+  TranslateModule,
+  TranslateService,
+  TranslateStore,
+} from '@ngx-translate/core';
 
 describe('BlogOverviewCardComponent', () => {
   let component: BlogOverviewCardComponent;
@@ -22,7 +27,11 @@ describe('BlogOverviewCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BlogOverviewCardComponent],
+      imports: [
+        BlogOverviewCardComponent,
+        TranslateModule.forRoot(), // Fix für `TranslateStore`-Fehler
+      ],
+      providers: [TranslateService, TranslateStore],
     }).compileComponents();
   });
 

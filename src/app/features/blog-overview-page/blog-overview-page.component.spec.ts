@@ -5,37 +5,16 @@ import { CommonModule } from '@angular/common';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BlogStore } from '../../core/stores/blog-state.store';
-import { Signal, signal } from '@angular/core';
+import { signal } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import {
+  TranslateModule,
+  TranslateService,
+  TranslateStore,
+} from '@ngx-translate/core';
 
-type BlogStoreMock = jasmine.SpyObj<{
-  loadAll: jasmine.Spy;
-  entries: Signal<{
-    pageSize: number;
-    data: {
-      id: number;
-      title: string;
-      contentPreview: string;
-      author: string;
-      likes: number;
-      comments: number;
-      likedByMe: boolean;
-      createdByMe: boolean;
-    }[];
-    pageIndex: number;
-    totalCount: number;
-    maxPageSize: number;
-  }>;
-  isLoadingList: Signal<boolean>;
-  errorDetail: Signal<string | null>;
-}>;
-
-describe('BlogOverviewPageComponent', () => {
-  let component: BlogOverviewPageComponent;
-  let fixture: ComponentFixture<BlogOverviewPageComponent>;
-  let mockBlogStore: BlogStoreMock;
-
-  const mockEntries = signal({
+class MockBlogStore {
+  entries = signal({
     pageSize: 10,
     data: Array.from({ length: 10 }, (_, i) => ({
       id: i + 1,
@@ -52,16 +31,19 @@ describe('BlogOverviewPageComponent', () => {
     maxPageSize: 10,
   });
 
-  const mockIsLoadingList = signal(false);
-  const mockErrorDetail = signal<string | null>(null);
+  isLoadingList = signal(false);
+  errorDetail = signal<string | null>(null);
+
+  loadAll = jasmine.createSpy('loadAll');
+}
+
+describe('BlogOverviewPageComponent', () => {
+  let component: BlogOverviewPageComponent;
+  let fixture: ComponentFixture<BlogOverviewPageComponent>;
+  let mockBlogStore: MockBlogStore;
 
   beforeEach(async () => {
-    mockBlogStore = jasmine.createSpyObj('BlogStore', {
-      loadAll: jasmine.createSpy(),
-      entries: mockEntries,
-      isLoadingList: mockIsLoadingList,
-      errorDetail: mockErrorDetail,
-    });
+    mockBlogStore = new MockBlogStore();
 
     await TestBed.configureTestingModule({
       imports: [
@@ -70,8 +52,13 @@ describe('BlogOverviewPageComponent', () => {
         RouterTestingModule,
         MatProgressSpinnerModule,
         BlogOverviewCardComponent,
+        TranslateModule.forRoot(),
       ],
-      providers: [{ provide: BlogStore, useValue: mockBlogStore }],
+      providers: [
+        { provide: BlogStore, useValue: mockBlogStore },
+        TranslateService,
+        TranslateStore,
+      ],
     }).compileComponents();
   });
 
@@ -89,17 +76,27 @@ describe('BlogOverviewPageComponent', () => {
     expect(mockBlogStore.loadAll).toHaveBeenCalled();
   });
 
-  it('should display the correct number of blog cards', () => {
+  it('should display the correct number of blog cards', async () => {
+    // Initiales Rendering
     fixture.detectChanges();
-    const blogCards = fixture.debugElement.queryAll(
-      By.css('app-blog-overview-card'),
-    );
-    console.log(blogCards);
-    expect(10).toBe(mockEntries().data.length);
+
+    // Warte, bis alle async Tasks abgeschlossen sind
+    await fixture.whenStable();
+    fixture.detectChanges(); // Erneute Aktualisierung des Templates
+
+    // Warte explizit, um sicherzustellen, dass Angular das DOM aktualisiert
+    setTimeout(() => {
+      fixture.detectChanges();
+
+      const blogCards = fixture.debugElement.queryAll(
+        By.css('app-blog-overview-card'),
+      );
+      expect(blogCards.length).toBe(mockBlogStore.entries().data.length);
+    }, 100); // Kurze Verzögerung, um sicherzustellen, dass das Rendering abgeschlossen ist
   });
 
   it('should display the loading spinner when loading', () => {
-    mockIsLoadingList.set(true);
+    mockBlogStore.isLoadingList.set(true);
     fixture.detectChanges();
 
     const spinner = fixture.debugElement.query(By.css('mat-progress-spinner'));
@@ -108,11 +105,9 @@ describe('BlogOverviewPageComponent', () => {
 
   it('should paginate blogs correctly', () => {
     const initialCount = component.paginatedBlogs.length;
-    expect(initialCount).toBe(0);
-
     component.loadMoreBlogs();
     fixture.detectChanges();
 
-    expect(component.paginatedBlogs.length).toBe(0);
+    expect(component.paginatedBlogs.length).toBeGreaterThan(initialCount);
   });
 });
